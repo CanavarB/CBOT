@@ -9,4 +9,4 @@ todo
 #venv
 CBOT
 .directory
-*_.py
+*___.py
