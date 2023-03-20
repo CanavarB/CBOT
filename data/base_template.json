@@ -1,0 +1,134 @@
+{   
+    "Text":{
+        
+        "fakülte-genel":{
+            "category":null,
+            "default_auto_archive_duration":60,
+            "nsfw":false,
+            "topic":"Fakülte genel sohbet kanalı",
+            "permissions_synced":false,
+            "overwrites":{
+                "Öğrenci":[448825510976, 86704795665],
+                "Görevli":[311386565696, 224143740945],
+                "Mezun":[448825510976, 86704795665]
+            }
+        },
+        "öğrenci-konseyi":{
+            "category":null,
+            "default_auto_archive_duration":4320,
+            "nsfw":false,
+            "topic":"Bu kanal sadece öğrenciler tarafından görüntülenebilir.",
+            "permissions_synced":false,
+            "overwrites":{
+                "Öğrenci":[448825510976, 86704795665]
+            }
+
+        },
+        "akademi-özel":{
+            "category":null,
+            "default_auto_archive_duration":4320,
+            "nsfw":false,
+            "topic":"Bu kanal sadece görevliler tarafından görüntülenebilir.",
+            "permissions_synced":false,
+            "overwrites":{
+                "Görevli":[311386565696, 224143740945]
+            }
+        },
+        "mezunlar-özel":{
+            "category":null,
+            "default_auto_archive_duration":4320,
+            "nsfw":false,
+            "topic":"Bu kanal sadece mezunlar tarafından görüntülenebilir.",
+            "permissions_synced":false,
+            "overwrites":{
+                "Mezun":[448825510976, 86704795665]
+            }
+        }
+    },    
+
+    "Voice":{
+        "• Fakülte Sesli Sohbet":{
+            "category":null,
+            "nsfw":false,
+            "bitrate":96000,
+            "rtc_region":null,
+            "permissions_synced":false,
+            "overwrites":{
+                "Öğrenci":[560530312768,138273763601],
+                "Görevli":[560530321216,138273755153],
+                "Mezun":[560530312768,138273763601]
+            }
+        }
+    },
+
+    "Forum":{
+        "forum":{
+            "category":null,
+            "available_tags":["okul", "fakülte", "yeni-öğrenci", "proje", "ödev-grubu", "duyuru", "diğer",
+                            "bilgisayar", "elektrik-elektronik", "endüstri", "makine", "biyomedikal", "inşaat",
+                            "anonim"],
+            "require_tag":true,
+            "default_auto_archive_duration":10080,
+            "slowmode_delay":600,
+            "nsfw":false,
+            "topic":"Forum kanalı; katılımcıların çesitli konularda soru sorabileceği, tartışma açabileceği, duyuru yapabileceği, bölümü ile alakalı teknik konular konuşabileceği, proje-ödev arkadaşı bulabileceği ayrı bir kanaldır.\n> **Paylaşım yaparken etiketleri konu ile alakalı seçmek, okurların paylaşımlarınızı bulmasını kolaylaştırır.**",
+            "permissions_synced":false,
+            "overwrites":{
+                "Öğrenci":[277025770560,155424272401],
+                "Görevli":[277025909824,155424133137],
+                "Mezun":[66560,432449976401]
+            }
+        }
+    },
+
+    "Category":{
+        "BİLGİSAYAR":{
+            "nsfw":false,
+            "overwrites":{
+                "Bilgisayar":[874063056448,224172978449],
+                "Görevli":[17179877632,1081056157265]
+            }
+        },
+        "BİYOMEDİKAL":{
+            "nsfw":false,
+            "overwrites":{
+                "Biyomedikal":[874063056448,224172978449],
+                "Görevli":[17179877632,1081056157265]
+            }
+        },
+        "ELEKTRİK ELEKTRONİK":{
+            "nsfw":false,
+            "overwrites":{
+                "Elektrik Elektronik":[874063056448,224172978449],
+                "Görevli":[17179877632,1081056157265]
+            }
+            
+        },
+        "ENDÜSTRİ":{
+            "nsfw":false,
+            "overwrites":{
+                "Endüstri":[874063056448,224172978449],
+                "Görevli":[17179877632,1081056157265]
+            }
+            
+        },
+        "İNŞAAT":{
+            "nsfw":false,
+            "overwrites":{
+                "İnşaat":[874063056448,224172978449],
+                "Görevli":[17179877632,1081056157265]
+            }
+        },
+        "MAKİNE":{
+            "nsfw":false,
+            "overwrites":{
+                "Makine":[874063056448,224172978449],
+                "Görevli":[17179877632,1081056157265]
+            }
+        }
+    },
+    
+    "Stage":{
+        
+    }    
+}

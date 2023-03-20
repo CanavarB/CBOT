@@ -1,0 +1,12 @@
+.env
+*__pycache__
+archive/
+logs/
+db/
+web-scrapping/
+*bak
+todo
+#venv
+CBOT
+.directory
+*_.py

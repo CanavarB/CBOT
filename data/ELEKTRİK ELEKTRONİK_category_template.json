@@ -1,0 +1,42 @@
+{
+    "Text":{
+        "genel":{
+            "category":"ELEKTRİK ELEKTRONİK",
+            "default_auto_archive_duration":4320,
+            "nsfw":false,
+            "topic":"Elektrik Elektronik Mühendisliği genel sohbet kanalı. Bu kanal sadece \"Elektrik Elektronik\" rolüne sahip kişiler tarafından görüntülenebilir.",
+            "permissions_synced":true,
+            "overwrites":{
+            }
+        },
+        "ders-notları":{
+            "category":"ELEKTRİK ELEKTRONİK",
+            "default_auto_archive_duration":4320,
+            "nsfw":false,
+            "topic":"Elektrik Elektronik Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+            "permissions_synced":true,
+            "overwrites":{
+            }
+        }
+        
+    },
+    "Voice":{
+        "• Sesli Sohbet":{
+            "category":"ELEKTRİK ELEKTRONİK",
+            "nsfw":false,
+            "bitrate":96000,
+            "rtc_region":null,
+            "permissions_synced":true,
+            "overwrites":{
+            }
+        }
+    },
+    
+    "Forum":{
+    
+    },
+
+    "Stage":{
+        
+    }
+}

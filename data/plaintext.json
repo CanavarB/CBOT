@@ -1,0 +1,86 @@
+{
+    "WELCOMEMSG": "Başkent Üniversitesi Mühendislik Fakültesi Discord kanalına hoş geldin!",
+    "RETURNTOSTART":"Ana menüye dönülüyor.",
+    "STARTMSG": "Lütfen kimlik doğrulama için kimliğini belirt. (butona tıkla)",
+    "STARTMSGSTU": "Lütfen kimlik doğrulama için öğrenci numaranı gir. (Örn. 21996142)",
+    "STARTMSGPER": "Lütfen Başkent Üniversitesi E-Posta kullanıcı adını gir.",
+    "NOTFOUNDSTUMSG": " mühendislik fakültesinde kayıtlı öğrenciler arasında bulunamadı.",
+    "NOTFOUNDPERMSG": " mühendislik fakültesinde kayıtlı personeller arasında bulunamadı.",
+    "WRONGNUMMSG": "Öğrenci numarası 8 haneli bir sayı olmalıdır. (Örn. 21996844)",
+    "FOUNDMSG": " halihazırda sunucuda kayıtlı.",
+    "BANNED": "sunucudan kalıcı olarak banlandı.",
+
+    "ASKID_TITTLE":"Kullanıcı Doğrulama Sistemi",
+    "SENDVERMSG": "Doğrulama Kodunu Gönder",
+    "EMAILMSG": "adresine bir doğrulama kodu göndereceğim. Doğrulama kodunu önünde çıkacak olan pencereye girmelisin.",
+    "VERCODEMSG": "Lütfen doğrulama kodunu gir.",
+    "VERCODETIMEOUT":"Doğrulama kodunu girmek için geçerli süreyi aştınız. Lütfen tekrar deneyin.",
+    "TICKETNOTFOUND":"Şimdilik bir hata oluştu lütfen tekrar deneyin.",
+    "WRONGVERCODEMSG":"Doğrulama kodu yanlış. Lütfen tekrar deneyin.",
+    "TIMEOUTMSG":"Doğrulama kodu için geçerli süre doldu. Lütfen tekrar deneyin.",
+    "MANYTRYMSG":"Çok fazla sayıda deneme yaptınız lütfen yeniden doğrulama yapınız.",
+    "MANYEMAIL":"Çok fazla sayıda e-posta isteğinde bulundunuz. Spam koruması nedeniyle hesabınız askıya alındı. Lütfen daha sonra tekrar deneyiniz.",
+    "ALREADY_REGISTERED": "Kimlik doğrulama işlemin tamamlandı. Yeniden doğrulama yapmak istiyorsan sunucudan ayrılmalısın.",
+    
+    "ROOTMSG1":"Eğer bir sorun olduğunu düşünüyorsan ",
+    "ROOTMSG2":" kullanıcısına mesaj atabilirsin.",
+    "ROOTSMSG2":" kullanıcılarına mesaj atabilirsin.",
+    "TIMEOUTFORANSWER":"Cevap vermek için süreniz doldu. Güvenlik önlemleri nedeniyle Geçiş Kapısı'ndan atıldınız. Yeniden denemek için davet linki:",
+    "NAMECHOOSE": "Hangi isim ile topluluğa katılmak istersin? (butona tıkla)",
+    "NAMECHOOSETIMEOUT": "Seçim yapmak için süreniz doldu. Otomatik olarak 1 numaralı isim seçildi.",
+    "NOTICKET":"Önce Geçiş Kapısı'ndan kimliğini doğrulamalısın.",
+    
+    "SORRY":"Üzgünüm,",
+    "WELCOME": "Hoşgeldin,",
+    "STUDENT": "Öğrenci",
+    "PERSONNEL": "Personel",
+    "TRYAGAIN": "Tekrar Dene",
+    "RETURN2BEGIN": "Doğrulamayı Yeniden Başlat",
+    "CONG": "Tebrikler, ",
+    "SELECTED": " seçildi.",
+    "REASON":{
+        "UPDATE_BASE_ROLES": "Comming from \"update_base_roles\" command.",
+        "UPDATE_BASE_ROLES_COLOR": "Comming from \"update_base_roles\" command. Color was different than config.ini.",
+        "UPDATE_BASE_ROLES_PERMISSIONS": "Comming from \"update_base_roles\" command. Permissions were different than config.ini.",
+        "UPDATE_BASE_ROLES_MENTIONABLE": "Comming from \"update_base_roles\" command. Mentionable was different than config.ini.",
+        "UPDATE_BASE_ROLES_HOIST": "Comming from \"update_base_roles\" command. Hoist was different than config.ini.",
+
+        "UPDATE_DEPARTMENT_ROLES": "Comming from \"update_department_roles\" command.",
+        "UPDATE_DEPARTMENT_ROLES_COLOR": "Comming from \"update_department_roles\" command. Color was different than DB.DEPARTMENT.colorHEX.",
+        "UPDATE_DEPARTMENT_ROLES_PERMISSIONS": "Comming from \"update_department_roles\" command. Permissions were different than config.ini.",
+        "UPDATE_DEPARTMENT_ROLES_MENTIONABLE": "Comming from \"update_department_roles\" command. Mentionable was different than config.ini.",
+        "UPDATE_DEPARTMENT_ROLES_HOIST": "Comming from \"update_department_roles\" command. Hoist was different than config.ini.",
+
+
+        "UPDATE_LECTURE_ROLES": "Comming from \"update_lecture_roles\" command.",
+        "UPDATE_LECTURE_ROLES_COLOR": "Comming from \"update_lecture_roles\" command. Color was different than dark theme color.",
+        "UPDATE_LECTURE_ROLES_PERMISSIONS": "Comming from \"update_lecture_roles\" command. Permissions were different than config.ini.",
+        "UPDATE_LECTURE_ROLES_MENTIONABLE": "Comming from \"update_lecture_roles\" command. Mentionable was different than config.ini.",
+        "UPDATE_LECTURE_ROLES_HOIST": "Comming from \"update_lecture_roles\" command. Hoist was different than config.ini.",
+
+        "UPDATE_DEPARTMENT_CATAGORIES": "Comming from \"update_department_categories\" command.",
+        "UPDATE_DEPARTMENT_CATAGORIES_OVERWRITES": "Comming from \"update_department_categories\" command. Overwrites were different from \"permissions_policy_overwrites_Category\" map.",
+
+        "UPDATE_LECTURE_TEXTCHANNELS": "Comming from \"update_lecture_TextChannels\" command.",
+        "UPDATE_LECTURE_TEXTCHANNELS_CATEGORY": "Comming from \"update_lecture_TextChannels\" command. TextChannel wasn't belogs to the related category in DB.LECTURE.department.",
+        "UPDATE_LECTURE_TEXTCHANNELS_OVERWRITES": "Comming from \"update_lecture_TextChannels\" command. Overwrites were different from \"permissions_policy_overwrites_TextChannel\" map.",
+        "UPDATE_LECTURE_TEXTCHANNELS_TOPIC": "Comming from \"update_lecture_TextChannels\" command. Topic was not same with DB.LECTURE.name",
+        "UPDATE_LECTURE_TEXTCHANNELS_ARCDURATION": "Comming from \"update_lecture_TextChannels\" command. default_auto_archive_duration was not 7 days.",
+        
+        "NO_BASE_ROLE":"There was no base role for: ",
+        "NO_LECTURE_ROLES":"There was no lecture code for: ",
+        "NO_LECTURE_TEXTCHANNELS":"There was no lecture text channel for: ",
+        "CHANNEL_DELETED":"Lecture text channel deleted. So it's role deleted: ",
+
+        "CREATE_INVITE":"Invite created for: ",
+        "NOTREGISTERED":"User has no base role.",
+        "TIMEOUTFORANSWER":"Timed out for answering.",
+        "ALREADY_REGISTERED": "USER is still in GUILD"
+    },
+    "ANON":{
+    "AGREEMENTTEXT":"Anonim duyuru özelliği ile CBOT sizin için forum kanalının anonim kategorisinde bir mesaj yayınlar. Bu işlem otomatik bir şekilde gerçekleştirilir. Sözleşmeyi kabul etmeniz halinde bu özelliği kullanabilirsiniz. Anonim duyurularınızda kişilere veya kurumlara hakaret etmek veya küçük düşürmek; kişilik haklarına aykırı söylemde bulunmak; nefret söyleminde bulunmak yasaktır. Bu kurallara uymayan kişilerin isimleri gönderi ile birlikte yayınlanacak ve kişi süresiz şekilde sunucudan uzaklaştırılacaktır. Söz konusu duyuru 10 gün içerisinde otomatik olarak silinir ancak öncesinde silmek ya da değiştirmek sunucu yetkililerine bağlıdır ve hiçbir gerekçe sunmadan bu yetkilerini kullanma hakkına sahiptirler. Sözleşmeyi kabul ediyor musunuz?",
+    "DONE": "Paylaşıldı.",
+    "TIMEOUTMSG": "Gönderi girmek için süreniz doldu. Yeniden denemek için: $anon",
+    "DM_USAGE_WARNING": "$anon komutu sadece özel mesaj kanalında çalışır (bu kanal). Sunucu içinde kullanmak anonimliğinize zarar verebilir. Yeniden denemek için: $anon (bu kanalda)"
+    }
+}

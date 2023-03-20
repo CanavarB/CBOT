@@ -1,0 +1,43 @@
+{
+    "Text":{
+        "genel":{
+            "category":"BİYOMEDİKAL",
+            "default_auto_archive_duration":4320,
+            "nsfw":false,
+            "topic":"Biyomedikal Mühendisliği genel sohbet kanalı. Bu kanal sadece \"Biyomedikal\" rolüne sahip kişiler tarafından görüntülenebilir.",
+            "permissions_synced":true,
+            "overwrites":{
+            }
+        },
+        "ders-notları":{
+            "category":"BİYOMEDİKAL",
+            "default_auto_archive_duration":4320,
+            "nsfw":false,
+            "topic":"Biyomedikal Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+            "permissions_synced":true,
+            "overwrites":{
+                "Biyomedikal":0
+            }
+        }
+        
+    },
+    "Voice":{
+        "• Sesli Sohbet":{
+            "category":"BİYOMEDİKAL",
+            "nsfw":false,
+            "bitrate":96000,
+            "rtc_region":null,
+            "permissions_synced":true,
+            "overwrites":{
+            }
+        }
+    },
+    
+    "Forum":{
+    
+    },
+
+    "Stage":{
+        
+    }
+}
