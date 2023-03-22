@@ -26,7 +26,7 @@ class CMail():
         CBOT
 
         Merhaba {name},
-        Dğrulama kodu: {str(verCode)}
+        Doğrulama kodu: {str(verCode)}
         """
         html_template = f"""
         <h1>CBOT</h1>
