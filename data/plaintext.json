@@ -1,17 +1,14 @@
 {
     "WELCOMEMSG": "Başkent Üniversitesi Mühendislik Fakültesi Discord kanalına hoş geldin!",
-    "RETURNTOSTART":"Ana menüye dönülüyor.",
     "STARTMSG": "Lütfen kimlik doğrulama için kimliğini belirt. (butona tıkla)",
-    "STARTMSGSTU": "Lütfen kimlik doğrulama için öğrenci numaranı gir. (Örn. 21996142)",
-    "STARTMSGPER": "Lütfen Başkent Üniversitesi E-Posta kullanıcı adını gir.",
-    "NOTFOUNDSTUMSG": " mühendislik fakültesinde kayıtlı öğrenciler arasında bulunamadı.",
-    "NOTFOUNDPERMSG": " mühendislik fakültesinde kayıtlı personeller arasında bulunamadı.",
+    "NOTFOUNDSTUMSG": "mühendislik fakültesinde kayıtlı öğrenciler arasında bulunamadı.",
+    "NOTFOUNDPERMSG": "mühendislik fakültesinde kayıtlı görevliler arasında bulunamadı.",
     "WRONGNUMMSG": "Öğrenci numarası 8 haneli bir sayı olmalıdır. (Örn. 21996844)",
     "FOUNDMSG": " halihazırda sunucuda kayıtlı.",
     "BANNED": "sunucudan kalıcı olarak banlandı.",
 
     "ASKID_TITTLE":"Kullanıcı Doğrulama Sistemi",
-    "SENDVERMSG": "Doğrulama Kodunu Gönder",
+    "SENDAGAIN": "Yeniden Gönder",
     "EMAILMSG": "adresine bir doğrulama kodu göndereceğim. Doğrulama kodunu önünde çıkacak olan pencereye girmelisin.",
     "VERCODEMSG": "Lütfen doğrulama kodunu gir.",
     "VERCODETIMEOUT":"Doğrulama kodunu girmek için geçerli süreyi aştınız. Lütfen tekrar deneyin.",
@@ -75,12 +72,13 @@
         "CREATE_INVITE":"Invite created for: ",
         "NOTREGISTERED":"User has no base role.",
         "TIMEOUTFORANSWER":"Timed out for answering.",
-        "ALREADY_REGISTERED": "USER is still in GUILD"
+        "ALREADY_REGISTERED": "USER is still in GUILD",
+        "SUBLIST_ACHIEVED":"Subscriber of lecture achieved to limit. Role given to old sub."
     },
     "ANON":{
-    "AGREEMENTTEXT":"Anonim duyuru özelliği ile CBOT sizin için forum kanalının anonim kategorisinde bir mesaj yayınlar. Bu işlem otomatik bir şekilde gerçekleştirilir. Sözleşmeyi kabul etmeniz halinde bu özelliği kullanabilirsiniz. Anonim duyurularınızda kişilere veya kurumlara hakaret etmek veya küçük düşürmek; kişilik haklarına aykırı söylemde bulunmak; nefret söyleminde bulunmak yasaktır. Bu kurallara uymayan kişilerin isimleri gönderi ile birlikte yayınlanacak ve kişi süresiz şekilde sunucudan uzaklaştırılacaktır. Söz konusu duyuru 10 gün içerisinde otomatik olarak silinir ancak öncesinde silmek ya da değiştirmek sunucu yetkililerine bağlıdır ve hiçbir gerekçe sunmadan bu yetkilerini kullanma hakkına sahiptirler. Sözleşmeyi kabul ediyor musunuz?",
-    "DONE": "Paylaşıldı.",
-    "TIMEOUTMSG": "Gönderi girmek için süreniz doldu. Yeniden denemek için: $anon",
-    "DM_USAGE_WARNING": "$anon komutu sadece özel mesaj kanalında çalışır (bu kanal). Sunucu içinde kullanmak anonimliğinize zarar verebilir. Yeniden denemek için: $anon (bu kanalda)"
+        "AGREEMENTTEXT":"Anonim duyuru özelliği ile CBOT sizin için forum kanalının anonim kategorisinde bir mesaj yayınlar. Bu işlem otomatik bir şekilde gerçekleştirilir. Sözleşmeyi kabul etmeniz halinde bu özelliği kullanabilirsiniz. Anonim duyurularınızda kişilere veya kurumlara hakaret etmek veya küçük düşürmek; kişilik haklarına aykırı söylemde bulunmak; nefret söyleminde bulunmak yasaktır. Bu kurallara uymayan kişilerin isimleri gönderi ile birlikte yayınlanacak ve kişi süresiz şekilde sunucudan uzaklaştırılacaktır. Söz konusu duyuru 10 gün içerisinde otomatik olarak silinir ancak öncesinde silmek ya da değiştirmek sunucu yetkililerine bağlıdır ve hiçbir gerekçe sunmadan bu yetkilerini kullanma hakkına sahiptirler. Sözleşmeyi kabul ediyor musunuz?",
+        "DONE": "Paylaşıldı.",
+        "TIMEOUTMSG": "Gönderi girmek için süreniz doldu. Yeniden denemek için: $anon",
+        "DM_USAGE_WARNING": "$anon komutu sadece özel mesaj kanalında çalışır (bu kanal). Sunucu içinde kullanmak anonimliğinize zarar verebilir. Yeniden denemek için: $anon (bu kanalda)"
     }
 }
