@@ -1,24 +1,36 @@
 from settings.globals import *
+from CLogger import CLogger
 import sqlite3
 from hashlib import md5
 from time import asctime
+
 
 class CDB():
     STUDENT = 0
     ACADEMIC = 1
     AWAY = 2
     RESEARCHER = 3
-    def __init__(self, semesterDBPath, guildDBPath):
+    
+    STUDENT_NAME = 'Öğrenci'
+    ACADEMIC_NAME = 'Görevli'
+    AWAY_NAME = 'Mezun'
+    RESEARCHER_NAME = ACADEMIC_NAME
+    def __init__(self, semesterDBPath, guildDBPath, logger : CLogger):
+        global LOGGER
+        LOGGER = logger
+        
         self.s_conn = sqlite3.connect(semesterDBPath)
+        LOGGER.info(f"Connected to {semesterDBPath}")
         self.s_cursor = self.s_conn.cursor()
         
         self.d_conn = sqlite3.connect(guildDBPath)
+        LOGGER.info(f"Connected to {guildDBPath}")
         self.d_cursor = self.d_conn.cursor()
 
     def d_commit(self):
         self.d_conn.commit()   
     
-    def select_user(self, userID : str, required = '*', type = None):
+    def select_user(self, type, userID : str, required = '*'):
         
         type_condition = ''
         if type == CDB.STUDENT:
@@ -67,7 +79,7 @@ class CDB():
         if department is None: raise DepartmentNotFoundError(f"Department ({departmentID}) not Found")
         return department
 
-    def select_user_lectures(self, userID : str, type = None):
+    def select_user_lectures(self, userID : str, type):
         if type == CDB.STUDENT:
             type_condition_table = 'STUDENT_LECTURE'
             type_condition_column = 'studentID'
@@ -82,7 +94,7 @@ class CDB():
         self.s_cursor.execute(query, (userID,))
         lectures = self.s_cursor.fetchmany()
         
-        if lectures[0] is None: raise LectureNotFoundError(f"User's ({userID}) lectures are not Found!")
+        #if lectures[0] is None: raise LectureNotFoundError(f"User's ({userID}) lectures are not Found!")
 
         return lectures
 
@@ -110,7 +122,14 @@ class CDB():
             raise oe
         if lecture is None: raise GuildLectureNotFoundError(f"Lecture ({code}) not Found")
         return lecture
-    
+
+    def select_sublist(self, lectureCode : str):
+        query = f'''SELECT memberID FROM SUBLIST WHERE SUBLIST.lectureCode == ?;'''
+        
+        self.d_cursor.execute(query, (lectureCode,))
+        return self.d_cursor.fetchmany()
+        
+
     def update_member(self, memberID : int, required : str = '', value = 0):
         if required == '':
             raise ColumnValueError('You need to specify update column')
@@ -128,7 +147,7 @@ class CDB():
                 raise ColumnValueError(f'No such column as {required}')
             raise oe
 
-    def update_lecture_sub(self, code : str, value : int = 0):
+    def __update_lecture_sub(self, code : str, value : int = 0):
         query = f'''
                 UPDATE LECTURE
                 {'SET subscriber = ?' if value else 'SET subscriber = subscriber + 1'}
@@ -139,6 +158,15 @@ class CDB():
         else:
             self.s_cursor.execute(query)
         self.s_conn.commit()
+    def make_sub(self, code : str, member : discord.Member):
+        self.__update_lecture_sub(code=code)
+        query = f'''
+                INSERT INTO SUBLIST (memberID, lectureCode)
+                VALUES (?,?)'''
+        values = (member.id, code)
+        self.d_cursor.execute(query, (values,))
+        self.d_commit()
+
 
     def insert_member(self, member: discord.Member, userID: str, type: int):
         query = f'''INSERT INTO MEMBER (id, name, userID, time, type)
