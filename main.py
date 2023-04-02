@@ -1,4 +1,4 @@
-from settings import *
+from settings import CBOT_SECRET_TOKEN, LOG_LEVEL
 from CBOT import CBOT
 
 def main():

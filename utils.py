@@ -1,11 +1,11 @@
-import json
-import os
+from json import load as json_load
+from os import listdir as os_listdir
 from discord.ext import commands
 import discord
 
 def read_json(path) -> dict:
     with open(path, 'r', encoding="utf-8") as jsonFile:
-        db = json.load(jsonFile)
+        db = json_load(jsonFile)
         jsonFile.close()
         return db
 
@@ -27,13 +27,13 @@ def quote(string: str) -> str:
 
 def get_Cogs(cogspath):
     cogs = list()
-    for filename in os.listdir(cogspath):
+    for filename in os_listdir(cogspath):
         if filename.endswith('.py') and not filename.startswith('_'):
             cogs.append(f'extensions.cogs.{filename[:-3]}') #TODO:fix path
     return cogs
 def get_Commands(commandpath):
     commands = list()
-    for filename in os.listdir(commandpath):
+    for filename in os_listdir(commandpath):
         if filename.endswith('.py'):
             commands.append(f'extensions.commands.{filename[:-3]}')
     return commands
