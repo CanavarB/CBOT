@@ -4,6 +4,7 @@ from logging import WARNING
 #ENVs
 GUILD_ID = int(getenv('MAIN_GUILD_ID'))           #Başkent Üniversitesi Mühendislik Fakültesi Server ID
 FORUM_CHANNEL_ID = int(getenv('FORUMCHANNELID')) #Başkent Üniversitesi Mühendislik Fakültesi Server Forum Channel ID
+GUILD_INVITE_CHANNEL_ID = int(getenv('GUILDINVITECHANNELID')) #Başkent Üniversitesi Mühendislik Fakültesi Server 'Fakülte Genel' Text Channel
 
 #PATHs
 SEMESTER_DB_PATH = DB_PATH / f'{SEMESTER}.db'
