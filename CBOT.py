@@ -33,7 +33,7 @@ class CBOT(commands.Bot):
             LOGGER.info(f"{member} left {self.GUILD.name}")
             #TODO: delete member in database
         elif member.guild.id == GATEWAY_GUILD_ID:
-            LOGGER.info(f"{member} left {self.GUILD.name}")
+            LOGGER.info(f"{member} left {self.GATEWAY.name}")
     async def on_member_ban(self, guild : discord.Guild, member : discord.Member):
         if member.bot: return
         
