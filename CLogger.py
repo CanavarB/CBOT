@@ -1,4 +1,3 @@
-from settings.globals import *
 from sys import stdout
 import logging.handlers
 import logging

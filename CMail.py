@@ -1,4 +1,4 @@
-from settings.globals import *
+from CLogger import CLogger
 import smtplib, ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -6,7 +6,12 @@ from email.mime.text import MIMEText
 class CMail():
     port = 465
     smtp_server_domain_name = "smtp.gmail.com"
-    def __init__(self, MAILADD, MAILADD_PASS):
+    def __init__(self, MAILADD, MAILADD_PASS, logger : CLogger):
+        
+        global LOGGER
+        LOGGER = logger
+        
+
         self.sender_mail = MAILADD
         self.password = MAILADD_PASS
         self.ssl_context = ssl.create_default_context()
