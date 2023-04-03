@@ -85,16 +85,8 @@ class Register(commands.Cog):
         #DEPARTMENT ROLE
 
         
-        #LECTURE ROLES
-        lectures = ()
-        if ticket.type == DB.RESEARCHER:
-            departmentCategory : discord.CategoryChannel = utils.get(self.CBOT.GUILD.categories,name=departmentName)
-            for channel in departmentCategory.text_channels:
-                  memberRoles.append(utils.get(channel.changed_roles, name=channel.name))
-        
-        else:
-            lectures = DB.select_user_lectures(userID=ticket.UserID, type=ticket.type)
-            
+        #LECTURE ROLES     
+        lectures = DB.select_user_lectures(userID=ticket.UserID, type=ticket.type)
         
         for code, branch in lectures:
             DB.make_sub(code=code, member=member)
@@ -113,6 +105,12 @@ class Register(commands.Cog):
                     newLectureRole = await self.create_guild_lecture(code=code, name=name, departmentID=dep)
                     self.CBOT.loop.create_task(self.sublist_control_task(lectureCode=code, lectureRole=newLectureRole))
                     memberRoles.append(newLectureRole)
+        
+        if ticket.type == DB.RESEARCHER:
+            departmentCategory : discord.CategoryChannel = utils.get(self.CBOT.GUILD.categories,name=departmentName)
+            for channel in departmentCategory.text_channels:
+                  memberRoles.append(utils.get(channel.changed_roles, name=channel.name))
+        
         #LECTURE ROLES
         
         await member.edit(nick=ticket.name, roles=memberRoles)
