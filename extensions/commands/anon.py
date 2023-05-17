@@ -1,4 +1,11 @@
-from extensions.command_utils import *
+from common.globals import TEXT, FORUM_CHANNEL_ID
+from common.utils import bold, quote
+from extensions.command_utils import is_active_member, is_in_DMChannel, sleep
+from discord.ext import commands
+import discord
+from CDB import CDB
+
+DB = CDB()
 
 
 @commands.command()
@@ -19,9 +26,9 @@ async def anon(ctx : commands.Context):
         await ctx.send(TEXT['ANON']['TIMEOUTMSG'])
         return
     elif view_msg_body is not None or view_msg_title is not None:
-        FORUM_CHANNEL : discord.ForumChannel = discord.utils.get(ctx.bot.GUILD.forums, id=FORUM_CHANNEL_ID)
+        FORUM_CHANNEL : discord.ForumChannel = ctx.bot.get_channel(FORUM_CHANNEL_ID)
         ANON_TAG : discord.ForumTag = discord.utils.get(FORUM_CHANNEL.available_tags, name='anonim')
-        msg_body = f'{utils.bold(DB.get_member_anonName(member=ctx.author))} diyor ki:\n\n {utils.quote(view_msg_body)}'
+        msg_body = f'{bold(DB.get_member_anonName(member=ctx.author))} diyor ki:\n\n {quote(view_msg_body)}'
         await FORUM_CHANNEL.create_thread(name=view_msg_title, content=msg_body, applied_tags=[ANON_TAG])
     
 
@@ -86,5 +93,5 @@ class AnonAgreementButton(discord.ui.View):
         await interaction.response.send_message(content="Reddedildi")
     
 
-async def setup(client : cb):
+async def setup(client : commands.Bot):
     client.add_command(anon)

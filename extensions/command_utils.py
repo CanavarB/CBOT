@@ -1,6 +1,12 @@
-from CBOT import CBOT as cb
-from settings import *
+from common.globals import GUILD_ID
+from common import utils
+import discord
+from discord.ext import commands
+from CDB import CDB, MemberNotFoundError
+
 from asyncio import sleep
+
+DB = CDB()
 
 #CONVERTERS
 def to_lower(argument : str):
@@ -35,3 +41,32 @@ def is_owner(ctx: commands.Context) -> bool:
             return True
     return False
 #CHECKS
+
+#VIEWS
+class YesNoButton(discord.ui.View):
+    STATUS_NOT_COMPLATE = -1 
+    STATUS_NO = 0
+    STATUS_YES = 1
+    def __init__(self,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.status = YesNoButton.STATUS_NOT_COMPLATE
+
+        yes_button = discord.ui.Button(label= "Evet",style=discord.ButtonStyle.green)
+        no_button = discord.ui.Button(label= "Hayır",style=discord.ButtonStyle.red)
+
+        yes_button.callback = self.yes_button_callback
+        no_button.callback = self.no_button_callback
+
+        self.add_item(yes_button)
+        self.add_item(no_button)
+
+    async def yes_button_callback(self, interaction : discord.Interaction):
+        self.clear_items()
+        await interaction.response.edit_message(content="Kabul edildi.", view=self)
+        self.status = YesNoButton.STATUS_YES
+        self.stop()
+    async def no_button_callback(self, interaction : discord.Interaction):
+        self.clear_items()
+        await interaction.response.edit_message(content="Reddedildi.", view=self)
+        self.status = YesNoButton.STATUS_NO
+        self.stop()

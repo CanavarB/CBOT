@@ -1,13 +1,20 @@
-from extensions.command_utils import *
-
+from common.globals import BASE_TEMPLATE_PATH, ROLE_TEMPLATE_PATH, DATA_PATH, GUILD_ID, GATEWAY_GUILD_ID
+from common.utils import read_json
+from extensions.command_utils import sleep, is_owner
+import discord
+from discord.ext import commands
 
 class Synchronize(commands.Cog):
-    def __init__(self, CBOT : cb) -> None:
+    def __init__(self, client : commands.Bot) -> None:
         super().__init__()
-        self.CBOT = CBOT
+        self.CBOT = client
         
-        self.BASE_TEMPLATE = utils.read_json(BASE_TEMPLATE_PATH)
-        self.ROLE_TEMPLATE = utils.read_json(ROLE_TEMPLATE_PATH)
+        self.BASE_TEMPLATE = read_json(BASE_TEMPLATE_PATH)
+        self.ROLE_TEMPLATE = read_json(ROLE_TEMPLATE_PATH)
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        self.GUILD : discord.Guild = self.CBOT.get_guild(GUILD_ID)
 
     async def sync(self):
         await self.check_roles(template=self.ROLE_TEMPLATE['admins'])
@@ -40,8 +47,8 @@ class Synchronize(commands.Cog):
 
     async def sync_roles(self, template : dict):
         for roleName, RoleTemplate in template.items():
-            role = discord.utils.get(self.CBOT.GUILD.roles, name=roleName) 
-            if role is None: role = self.CBOT.GUILD.create_role(name=roleName)
+            role = discord.utils.get(self.GUILD.roles, name=roleName) 
+            if role is None: role = self.GUILD.create_role(name=roleName)
             color = role.color.value
             hoist = role.hoist
             mentionable = role.mentionable
@@ -59,7 +66,7 @@ class Synchronize(commands.Cog):
 
     def check_roles(self, template : dict):
         for roleName, RoleTemplate in template.items():
-            role = discord.utils.get(self.CBOT.GUILD.roles, name=roleName)
+            role = discord.utils.get(self.GUILD.roles, name=roleName)
             if role is None: raise Exception(f'There is no {roleName} role')
             color = role.color.value
             hoist = role.hoist
@@ -74,19 +81,19 @@ class Synchronize(commands.Cog):
     async def sync_TextChannel(self, template : dict):
         for TextChannelName, TextChannelTemplate in template.items():
             if TextChannelTemplate['category'] is None:
-                TextChannel = discord.utils.get(self.CBOT.GUILD.text_channels,
+                TextChannel = discord.utils.get(self.GUILD.text_channels,
                             name= TextChannelName, category=TextChannelTemplate['category'])
             else:
-                TextChannel = discord.utils.get(self.CBOT.GUILD.text_channels,
+                TextChannel = discord.utils.get(self.GUILD.text_channels,
                             name= TextChannelName, category__name=TextChannelTemplate['category'])
             
             if TextChannel is None:
-                category =  discord.utils.get(self.CBOT.GUILD.categories, 
+                category =  discord.utils.get(self.GUILD.categories, 
                             name=TextChannelTemplate['category']) \
                             if TextChannelTemplate['category'] is not None\
                             else None
                 
-                TextChannel = await self.CBOT.GUILD.create_text_channel(
+                TextChannel = await self.GUILD.create_text_channel(
                                 name=TextChannelName,
                                 category=category)
             
@@ -109,17 +116,17 @@ class Synchronize(commands.Cog):
     async def sync_VoiceChannel(self, template : dict):
         for VoiceChannelName, VoiceChannelTemplate in template.items():
             if VoiceChannelTemplate['category'] is None:
-                VoiceChannel = discord.utils.get(self.CBOT.GUILD.voice_channels,
+                VoiceChannel = discord.utils.get(self.GUILD.voice_channels,
                             name= VoiceChannelName, category=VoiceChannelTemplate['category'])
             else:
-                VoiceChannel = discord.utils.get(self.CBOT.GUILD.voice_channels,
+                VoiceChannel = discord.utils.get(self.GUILD.voice_channels,
                             name= VoiceChannelName, category__name=VoiceChannelTemplate['category'])
             if VoiceChannel is None:
-                category =  discord.utils.get(self.CBOT.GUILD.categories,
+                category =  discord.utils.get(self.GUILD.categories,
                             name=VoiceChannelTemplate['category']) \
                             if VoiceChannelTemplate['category'] is not None \
                             else None
-                VoiceChannel = await self.CBOT.GUILD.create_voice_channel(
+                VoiceChannel = await self.GUILD.create_voice_channel(
                                 name=VoiceChannelName,
                                 category=category)
             
@@ -140,18 +147,18 @@ class Synchronize(commands.Cog):
     async def sync_ForumChannel(self, template : dict):
         for ForumChannelName, ForumChannelTemplate in template.items():
             if ForumChannelTemplate['category'] is None:
-                ForumChannel = discord.utils.get(self.CBOT.GUILD.forums,
+                ForumChannel = discord.utils.get(self.GUILD.forums,
                             name= ForumChannelName, category=ForumChannelTemplate['category'])
             else:
-                ForumChannel = discord.utils.get(self.CBOT.GUILD.forums,
+                ForumChannel = discord.utils.get(self.GUILD.forums,
                             name= ForumChannelName, category__name=ForumChannelTemplate['category'])
             
             if ForumChannel is None:
-                category =  discord.utils.get(self.CBOT.GUILD.categories,
+                category =  discord.utils.get(self.GUILD.categories,
                             name=ForumChannelTemplate['category']) \
                             if ForumChannelTemplate['category'] is not None \
                             else None
-                ForumChannel = await self.CBOT.GUILD.create_forum(
+                ForumChannel = await self.GUILD.create_forum(
                                 name=ForumChannelName,
                                 category=category)
             
@@ -185,7 +192,7 @@ class Synchronize(commands.Cog):
 
     async def sync_CategoryChannel(self, template : dict):
         for CategoryChannelName, CategoryChannelTemplate in template.items():
-            CategoryChannel = discord.utils.get(self.CBOT.GUILD.categories,
+            CategoryChannel = discord.utils.get(self.GUILD.categories,
             name=CategoryChannelName)
             if CategoryChannel is None: Exception(f'There is no {CategoryChannelName} category!')
 
@@ -195,20 +202,20 @@ class Synchronize(commands.Cog):
             
             await self.sync_PermissionOverwrite(CategoryChannel, CategoryChannelTemplate['overwrites'])
 
-            await self.sync_channels(template=utils.read_json(DATA_PATH / (CategoryChannelName + '_category_template.json')))
+            await self.sync_channels(template=read_json(DATA_PATH / (CategoryChannelName + '_category_template.json')))
 
     async def sync_PermissionOverwrite(self, channel: discord.TextChannel |
     discord.VoiceChannel | discord.ForumChannel | discord.StageChannel | discord.CategoryChannel,
     overwrites: dict[str,int]):
         
         PermissionOverwrite = {}
-        PermissionOverwrite[self.CBOT.GUILD.default_role] = discord.PermissionOverwrite.from_pair(
+        PermissionOverwrite[self.GUILD.default_role] = discord.PermissionOverwrite.from_pair(
             discord.Permissions.none(), discord.Permissions.all()
         )
         for identifierName, pair in overwrites.items():
-            identifier = discord.utils.get(self.CBOT.GUILD.members, name = identifierName[0:]) \
+            identifier = discord.utils.get(self.GUILD.members, name = identifierName[0:]) \
                         if identifierName.startswith('@') \
-                        else discord.utils.get(self.CBOT.GUILD.roles, name = identifierName)
+                        else discord.utils.get(self.GUILD.roles, name = identifierName)
             
             
             overwrite = discord.PermissionOverwrite.from_pair(
@@ -226,7 +233,7 @@ class Synchronize(commands.Cog):
         
         if arg == '-reload' or arg == '-r':
             print(arg)
-            self.BASE_TEMPLATE = utils.read_json(BASE_TEMPLATE_PATH)
+            self.BASE_TEMPLATE = read_json(BASE_TEMPLATE_PATH)
 
     @commands.command()
     @commands.check(is_owner)
@@ -234,5 +241,5 @@ class Synchronize(commands.Cog):
         await self.sync_channels(template=self.BASE_TEMPLATE)
 
 #Cogs setup req.
-async def setup(client : cb):
+async def setup(client : commands.Bot):
     await client.add_cog(Synchronize(client))

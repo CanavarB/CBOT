@@ -1,10 +1,18 @@
+from common.globals import DEBUG, LOGS_PATH
 from sys import stdout
 import logging.handlers
 import logging
 
+if DEBUG:
+    LOG_PATH = LOGS_PATH / 'development'
+    LOG_LEVEL = logging.INFO
+else:
+    LOG_PATH = LOGS_PATH / 'production'
+    LOG_LEVEL = logging.WARNING
 
 class CLogger(logging.Logger):
-    def __init__(self, PATH, LOGLEVEL = 10, name='CBOT'):
+
+    def __init__(self, PATH = LOG_PATH, LOGLEVEL = LOG_LEVEL, name='CBOT'):
         super().__init__(name)
         self.setLevel(LOGLEVEL)
         

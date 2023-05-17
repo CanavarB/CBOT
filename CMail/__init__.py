@@ -1,30 +1,34 @@
+from common.globals import CBOT_MAIL_ADD, CBOT_MAIL_PASS
+
 from CLogger import CLogger
 import smtplib, ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+LOGGER = CLogger(name="CMAIL")
+
 class CMail():
     port = 465
     smtp_server_domain_name = "smtp.gmail.com"
-    def __init__(self, MAILADD, MAILADD_PASS, logger : CLogger):
-        
-        global LOGGER
-        LOGGER = logger
-        
 
-        self.sender_mail = MAILADD
-        self.password = MAILADD_PASS
+    __instance = None
+    def __new__(cls, *args, **kwargs):
+        if not cls.__instance:
+            cls.__instance = super().__new__(cls)
+        return cls.__instance
+
+    def __init__(self):        
+        self.address = CBOT_MAIL_ADD
         self.ssl_context = ssl.create_default_context()
         self.service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=self.ssl_context)
         
 
     def sendVerCode(self, emailTo, name, verCode):
-        self.service.login(self.sender_mail, self.password)
-        
-        
+        self.service.login(self.address, CBOT_MAIL_PASS)
+
         mail = MIMEMultipart('alternative')
         mail['Subject'] = 'CBOT Doğrulama Kodu'
-        mail['From'] = self.sender_mail
+        mail['From'] = self.address
         mail['To'] = emailTo
 
         text_template = f"""
@@ -46,5 +50,9 @@ class CMail():
         mail.attach(text_content)
         mail.attach(html_content)
 
-        self.service.sendmail(self.sender_mail, emailTo, mail.as_string())
-        self.service.login(self.sender_mail, self.password)
+        self.service.sendmail(self.address, emailTo, mail.as_string())
+
+        self.service.quit()
+        
+
+
