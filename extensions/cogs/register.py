@@ -1,7 +1,7 @@
 from extensions.command_utils import sleep, YesNoButton
 from common.globals import DEBUG, BASKENTMAIL, TEXT, GUILD_ID, GUILD_INVITE_CHANNEL_ID, GATEWAY_GUILD_ID, GATEWAY_INVITE_CHANNEL_ID
-from common.utils import bold
-from CDB import CDB, UserNotFoundError, GuildLectureNotFoundError
+from common.utils import bold, upper
+from CDB import CDB, UserNotFoundError, GuildLectureNotFoundError, DepartmentNotFoundError
 from CLogger import CLogger
 from CMail import CMail
 import discord
@@ -102,7 +102,7 @@ class Ticket():
     def get_complate(self) -> bool:
         return self._complate
     def get_credential(self) -> tuple[str, int, str, discord.Member]:
-        return (self._id, self._type, self._nick, self.member)
+        return (self._id, self._type, self._nick, self.member.id)
     
     def is_verCode_valid(self, verCode) -> bool:
         self._verCodeaAttempt -= 1
@@ -498,7 +498,7 @@ class Register(commands.Cog):
         elif member.guild.id == GUILD_ID:
             if self.is_complate(member=member):
                 try:
-                    await self.init_member(ticket=self.TICKETS[member.id])
+                    await self.init_member(member)
                 finally:
                     del self.TICKETS[member.id]
             else:
@@ -552,23 +552,24 @@ class Register(commands.Cog):
 
         return invite.url
 
-    async def init_member(self, ticket : Ticket):
+    async def init_member(self, _member : discord.Member):
         
-        _id , _type, _nick, _member = ticket.get_credential()
-        memberRoles = []
+        ticket = self.TICKETS[_member.id]
+        _id , _type, _nick, _memberID = ticket.get_credential()
+        memberRoles = set()
 
         #BASE ROLE
         if _type == Ticket.TYPE_ACADEMIC or _type == Ticket.TYPE_RESEARCHER:
-            memberRoles.append(discord.utils.get(self.GUILD.roles, name=DB.ACADEMIC_NAME))
+            memberRoles.add(discord.utils.get(self.GUILD.roles, name=DB.ACADEMIC_NAME))
         elif _type == Ticket.TYPE_STUDENT:
-            memberRoles.append(discord.utils.get(self.GUILD.roles, name=DB.STUDENT_NAME))
+            memberRoles.add(discord.utils.get(self.GUILD.roles, name=DB.STUDENT_NAME))
         #BASE ROLE
 
         #DEPARTMENT ROLE
-        departmentID = DB.select_user(type=_type, userID=_id, required='department')
+        departmentID = DB.select_user(type=_type, userID=_id, required='department')[0]
         departmentName = DB.select_department(departmentID=departmentID, required='name')[0]
         departmentRole : discord.Role = discord.utils.get(self.GUILD.roles, name=departmentName)
-        if departmentRole is not None: memberRoles.append(departmentRole)
+        if departmentRole is not None: memberRoles.add(departmentRole)
         #DEPARTMENT ROLE
 
         
@@ -580,31 +581,32 @@ class Register(commands.Cog):
             name, quota, subs, dep = DB.select_lecture(code=code, branch= branch, 
                                                        required='name, quota, subscriber, department')
             try:
-                memberRoles.append(
-                    discord.utils.get(
-                        self.GUILD.roles,
-                        id=DB.select_guild_lecture(code=code,
-                                                    required='roleID')[0]
-                    )
-                )
+                lectureRole = self.GUILD.get_role(
+                        DB.select_guild_lecture(code=code,
+                                                required='roleID')[0])
+                if lectureRole is None:
+                    LOGGER.critical("Database not sync")
+                    raise GuildLectureNotFoundError
+
+                memberRoles.add(lectureRole)
             except GuildLectureNotFoundError:
                 if quota < self.QUOTA_LIMIT:
                     continue
                 elif subs < self.SUB_LIMIT:
-                    DB.make_sub(code=code, member=_member)
+                    DB.make_sub(code=code, memberID=_memberID)
                 else:
                     newLectureRole = await self.create_guild_lecture(code=code, name=name, departmentID=dep)
                     self.CBOT.loop.create_task(self.sublist_control_task(lectureCode=code, lectureRole=newLectureRole))
-                    memberRoles.append(newLectureRole)
+                    memberRoles.add(newLectureRole)
         
         if _type == DB.RESEARCHER:
             departmentCategory : discord.CategoryChannel = discord.utils.get(self.GUILD.categories,name=departmentName)
             for channel in departmentCategory.text_channels:
-                  memberRoles.append(discord.utils.get(channel.changed_roles, name=channel.name))
+                  memberRoles.add(discord.utils.get(channel.changed_roles, name=channel.name))
         
         #LECTURE ROLES
-        
         await _member.edit(nick=_nick, roles=memberRoles)
+        
         DB.insert_member(member=_member, userID=_id, type=_type)
     
     async def create_guild_lecture(self, code : str, name : str, departmentID : str) -> discord.Role:
@@ -612,7 +614,14 @@ class Register(commands.Cog):
             name=code,
             permissions=discord.Permissions(0),
             mentionable=True)
-        category : discord.CategoryChannel = discord.utils.get(self.GUILD.categories, name=DB.select_department(departmentID=departmentID))
+        try:
+            category : discord.CategoryChannel = discord.utils.get(self.GUILD.categories, name=DB.select_department(departmentID=departmentID, required="name")[0])
+        except DepartmentNotFoundError as E:
+            if departmentID == 'MÜH':
+                category = None
+            else:
+                raise E
+        
         channel = await self.GUILD.create_text_channel(
             name=code,
             topic=name,
@@ -626,7 +635,7 @@ class Register(commands.Cog):
                     discord.Permissions.none(), discord.Permissions.all()
                 )
             })
-        DB.insert_guild_lecture(role=role, channel=channel)
+        DB.insert_guild_lecture(code=code, role=role, channel=channel)
 
         return role
 
@@ -658,7 +667,7 @@ class Register(commands.Cog):
         LOGGER.info("Sublist control tast requested.")
         await sleep(300)
         for memberID in DB.select_sublist(lectureCode=lectureCode):
-            member : discord.Member = discord.utils.get(self.GUILD.members, id=memberID)
+            member : discord.Member = self.GUILD.get_member(memberID)
             if member is not None:
                 await member.add_roles(lectureRole, reason=TEXT['REASON']['SUBLIST_ACHIEVED'])
         DB.remove_sublist(lectureCode=lectureCode)

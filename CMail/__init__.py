@@ -19,12 +19,10 @@ class CMail():
 
     def __init__(self):        
         self.address = CBOT_MAIL_ADD
-        self.ssl_context = ssl.create_default_context()
-        self.service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=self.ssl_context)
+        self.password = CBOT_MAIL_PASS
         
 
     def sendVerCode(self, emailTo, name, verCode):
-        self.service.login(self.address, CBOT_MAIL_PASS)
 
         mail = MIMEMultipart('alternative')
         mail['Subject'] = 'CBOT Doğrulama Kodu'
@@ -50,9 +48,16 @@ class CMail():
         mail.attach(text_content)
         mail.attach(html_content)
 
-        self.service.sendmail(self.address, emailTo, mail.as_string())
 
-        self.service.quit()
+        try:
+            with smtplib.SMTP("smtp.gmail.com", 587) as server:
+                server.starttls()
+                server.login(self.address, self.password)
+                server.send_message(mail)
+            LOGGER.info(f"Ver code send to {emailTo}")
+        except:
+            LOGGER.critical("Email error")
+    
         
 
 

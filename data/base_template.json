@@ -1,6 +1,5 @@
 {   
-    "Text":{
-        
+    "Text":{  
         "fakülte-genel":{
             "category":null,
             "default_auto_archive_duration":60,
@@ -82,48 +81,232 @@
     },
 
     "Category":{
-        "BİLGİSAYAR":{
+        "Bilgisayar":{
             "nsfw":false,
             "overwrites":{
                 "Bilgisayar":[874063056448,224172978449],
                 "Görevli":[17179877632,1081056157265]
+            },
+            "channels":{
+                "Text":{
+                    "genel":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Bilgisayar Mühendisliği genel sohbet kanalı. Bu kanal sadece \"Bilgisayar\" rolüne sahip kişiler tarafından görüntülenebilir.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    },
+                    "ders-notları":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Bilgisayar Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                },
+                "Voice":{
+                    "• Sesli Sohbet":{
+                        "nsfw":false,
+                        "bitrate":96000,
+                        "rtc_region":null,
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                }
             }
         },
-        "BİYOMEDİKAL":{
+        "Biyomedikal":{
             "nsfw":false,
             "overwrites":{
                 "Biyomedikal":[874063056448,224172978449],
                 "Görevli":[17179877632,1081056157265]
+            },
+            "channels":{
+                "Text":{
+                    "genel":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Biyomedikal Mühendisliği genel sohbet kanalı. Bu kanal sadece \"Biyomedikal\" rolüne sahip kişiler tarafından görüntülenebilir.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    },
+                    "ders-notları":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Biyomedikal Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                            "Biyomedikal":0
+                        }
+                    }
+                    
+                },
+                "Voice":{
+                    "• Sesli Sohbet":{
+                        "nsfw":false,
+                        "bitrate":96000,
+                        "rtc_region":null,
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                }
             }
         },
-        "ELEKTRİK ELEKTRONİK":{
+        "Elektrik-Elektronik":{
             "nsfw":false,
             "overwrites":{
                 "Elektrik Elektronik":[874063056448,224172978449],
                 "Görevli":[17179877632,1081056157265]
+            },
+            "channels":{
+                "Text":{
+                    "genel":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Elektrik Elektronik Mühendisliği genel sohbet kanalı. Bu kanal sadece \"Elektrik Elektronik\" rolüne sahip kişiler tarafından görüntülenebilir.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    },
+                    "ders-notları":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Elektrik Elektronik Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                    
+                },
+                "Voice":{
+                    "• Sesli Sohbet":{
+                        "nsfw":false,
+                        "bitrate":96000,
+                        "rtc_region":null,
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                }
             }
-            
         },
-        "ENDÜSTRİ":{
+        "Endüstri":{
             "nsfw":false,
             "overwrites":{
                 "Endüstri":[874063056448,224172978449],
                 "Görevli":[17179877632,1081056157265]
+            },
+            "channels":{
+                "Text":{
+                    "genel":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Endüstri Mühendisliği genel sohbet kanalı. Bu kanal sadece \"Endüstri\" rolüne sahip kişiler tarafından görüntülenebilir.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    },
+                    "ders-notları":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Endüstri Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                    
+                },
+                "Voice":{
+                    "• Sesli Sohbet":{
+                        "nsfw":false,
+                        "bitrate":96000,
+                        "rtc_region":null,
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                }
             }
-            
         },
-        "İNŞAAT":{
+        "İnşaat":{
             "nsfw":false,
             "overwrites":{
                 "İnşaat":[874063056448,224172978449],
                 "Görevli":[17179877632,1081056157265]
+            },
+            "channels":{
+                "Text":{
+                    "genel":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"İnşaat Mühendisliği genel sohbet kanalı. Bu kanal sadece \"İnşaat\" rolüne sahip kişiler tarafından görüntülenebilir.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    },
+                    "ders-notları":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"İnşaat Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                    
+                },
+                "Voice":{
+                    "• Sesli Sohbet":{
+                        "nsfw":false,
+                        "bitrate":96000,
+                        "rtc_region":null,
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                }
             }
         },
-        "MAKİNE":{
+        "Makine":{
             "nsfw":false,
             "overwrites":{
                 "Makine":[874063056448,224172978449],
                 "Görevli":[17179877632,1081056157265]
+            },
+            "channels":{
+                "Text":{
+                    "genel":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Makine Mühendisliği genel sohbet kanalı. Bu kanal sadece \"Makine\" rolüne sahip kişiler tarafından görüntülenebilir.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    },
+                    "ders-notları":{
+                        "default_auto_archive_duration":4320,
+                        "nsfw":false,
+                        "topic":"Makine Bölümü ders notları kanalı. Bu kanala yanlızca ders notlarını atmanız okurların notları bulmasını kolaylaştırır.",
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                    
+                },
+                "Voice":{
+                    "• Sesli Sohbet":{
+                        "nsfw":false,
+                        "bitrate":96000,
+                        "rtc_region":null,
+                        "permissions_synced":true,
+                        "overwrites":{
+                        }
+                    }
+                }
             }
         }
     },

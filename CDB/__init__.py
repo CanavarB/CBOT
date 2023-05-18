@@ -188,7 +188,7 @@ class CDB():
         query = f'''SELECT lectureCode, lectureBranch FROM {type_condition_table} WHERE {type_condition_column} == ?;'''
     
         self.s_cursor.execute(query, (userID,))
-        lectures = self.s_cursor.fetchmany()
+        lectures = self.s_cursor.fetchall()
         
         #if lectures[0] is None: raise LectureNotFoundError(f"User's ({userID}) lectures are not Found!")
 
@@ -232,10 +232,10 @@ class CDB():
         query = f'''
                 UPDATE MEMBER
                 SET {required} = ?
-                WHERE MEMBER.id == {memberID};
+                WHERE MEMBER.id == ?;
             '''
         try:    
-            self.d_cursor.execute(query, (value,))
+            self.d_cursor.execute(query, (value, memberID, ))
             self.d_commit()
         except sqlite3.OperationalError as oe:
             if 'no such column' in str(oe):
@@ -246,18 +246,18 @@ class CDB():
         query = f'''
                 UPDATE LECTURE
                 {'SET subscriber = ?' if value else 'SET subscriber = subscriber + 1'}
-                WHERE LECTURE.code == {code};
+                WHERE LECTURE.code == ?;
             '''
         if value:
-            self.s_cursor.execute(query, (value,))
+            self.s_cursor.execute(query, (value, code,))
         else:
-            self.s_cursor.execute(query)
+            self.s_cursor.execute(query, (code,))
         self.s_conn.commit()
-    def make_sub(self, code : str, member : discord.Member):
+    def make_sub(self, code : str, memberID : int):
         query = f'''
                 INSERT INTO SUBLIST (memberID, lectureCode)
                 VALUES (?,?)'''
-        values = (member.id, code)
+        values = (memberID, code)
         self.d_cursor.execute(query, (values,))
         self.d_commit()
     def remove_sublist(self, lectureCode : str):
@@ -277,17 +277,17 @@ class CDB():
         self.d_commit()
 
     def insert_member(self, member: discord.Member, userID: str, type: int):
-        query = f'''INSERT INTO MEMBER (id, name, userID, time, type)
+        query = f'''INSERT INTO MEMBER (id, nick, userID, time, type)
                     VALUES (?,?,?,?,?)'''
-        values = (member.id, member.nick, asctime(), userID, type)
-        self.d_cursor.execute(query, (values,))
+        values = (member.id, member.nick, userID, asctime(), type)
+        self.d_cursor.execute(query, values)
         self.d_commit()
-    def insert_guild_lecture(self, role : discord.Role, channel : discord.TextChannel):
+    def insert_guild_lecture(self, code : str, role : discord.Role, channel : discord.TextChannel):
         query = f'''INSERT INTO LECTURE (code, channelID, roleID, name)
                     VALUES (?,?,?,?)'''
 
-        values = (channel.name, channel.id, role.id, channel.topic)
-        self.d_cursor.execute(query, (values,))
+        values = (code, channel.id, role.id, channel.topic)
+        self.d_cursor.execute(query, values)
         self.d_commit()
 
     def insert_banned(self, member : discord.Member):
